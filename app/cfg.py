@@ -52,6 +52,7 @@ def cfg_frontend(vhost):
     frontend.append("bind 0.0.0.0:%s" % FRONTEND_PORT) 
     if NGINX_SSL_TERM:
         frontend.append("reqadd X-Forwarded-Proto:\ https")
+        frontend.append("reqadd X-Forwarded-Protocol:\ https")
             
     if SSL:
         frontend.append("reqadd X-Forwarded-Proto:\ https")
