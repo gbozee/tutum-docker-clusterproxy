@@ -49,7 +49,10 @@ def cfg_default(rsyslog_dst, maxconn, stats_port, stats_auth, mode, options, tim
 def cfg_frontend(vhost):
     cfg = OrderedDict()
     frontend = []
-    frontend.append("bind 0.0.0.0:%s" % FRONTEND_PORT)
+    frontend.append("bind 0.0.0.0:%s" % FRONTEND_PORT) 
+    if NGINX_SSL_TERM:
+        frontend.append("reqadd X-Forwarded-Proto:\ https")
+            
     if SSL:
         frontend.append("reqadd X-Forwarded-Proto:\ https")
         frontend.append("redirect scheme https code 301 if !{ ssl_fc }"),
